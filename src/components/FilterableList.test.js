@@ -85,10 +85,30 @@ test(`filters by id - renders only panda item when filterText is "Ailuropoda mel
 
   // panda item
   const pandaItem = screen.getByText(/Ailuropoda melanoleuca/i);
-  debugger;
   expect(pandaItem).toBeInTheDocument();
 });
 
-// filters by id
-// case-insensitive
-// 
+test(`case insensitive for id`, () => {
+  render(<FilterableList list={dummyList} filterText="ursus americanus" />);
+  // length
+  const bearList = screen.getAllByRole('listitem'); 
+  expect(bearList.length).toBe(1);
+
+  // panda item
+  const bearItem = screen.getByText(/ursus americanus/i);
+  expect(bearItem).toBeInTheDocument();
+});
+
+xit(`Allows scientfic name to be abbreviated - U. americanus`, () => {
+  render(<FilterableList list={dummyList} filterText="U. americanus" />);
+  // length
+  const bearList = screen.getAllByRole('listitem'); 
+  expect(bearList.length).toBe(1);
+
+  // panda item
+  const bearItem = screen.getByText(/ursus americanus/i);
+  expect(bearItem).toBeInTheDocument();
+});
+
+
+// handle parentheses?

@@ -1,11 +1,16 @@
 function FilterableList({list, filterText}) {
   let filteredList = [...list];
 
-  // filterText
-  if (filterText !== '') {
+  const f = filterText.toLowerCase();
+  if (f !== '') {
+    // abbreviated scientific name
+    // ^(\w)\. ([\w ]+)
+
+    // other
     filteredList = list.filter(
-      (listItem) => listItem.id.includes(filterText) ||
-        listItem.otherNames.some(otherName => otherName.includes(filterText))
+      (listItem) =>
+        listItem.id.toLowerCase().includes(f) ||
+        listItem.otherNames.some(otherName => otherName.toLowerCase().includes(f))
     );
   }
   

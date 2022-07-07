@@ -1,8 +1,9 @@
-function FilterableList({list, filterText}) {
+function useFilter({list, filterText}) {
   let filteredList = [...list];
 
   const f = filterText.toLowerCase();
   if (f !== '') {
+    // TODO (maybe): filter by abbreviated scientific name
     // abbreviated scientific name
     // ^(\w)\. ([\w ]+)
 
@@ -15,17 +16,7 @@ function FilterableList({list, filterText}) {
   }
   
 
-  return (
-    <ul>
-      {
-        filteredList.map((listItem) => (
-          <li key={listItem.speciesName}>
-            {listItem.speciesName}
-          </li>
-        ))
-      }
-    </ul>
-  );
+  return filteredList;
 }
 
-export default FilterableList;
+export default useFilter;

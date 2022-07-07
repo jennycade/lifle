@@ -1,11 +1,13 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import FilterableList from './components/FilterableList';
+import useFilter from './hooks/useFilter';
 import getSpeciesList from './services/getSpeciesList';
 
 function App() {
   const [guessInput, setGuessInput] = useState('');
   const [species, setSpecies] = useState('');
+
+  const filteredList = useFilter({list: species, filterText: guessInput});
 
   const onInputChange = (e) => {
     setGuessInput(e.target.value);
@@ -41,8 +43,15 @@ function App() {
             value={guessInput}
             onChange={onInputChange}
           />
+
           {/* hide when input box doesn't have focus */}
-          <FilterableList list={species} filterText={guessInput} />
+          <ul className='speciesList'>
+            {filteredList.map((speciesObject) => (
+              <li key={speciesObject._id}>
+                {speciesObject.speciesName}
+              </li>
+            ))}
+          </ul>
         </section>
       </main>
     </div>

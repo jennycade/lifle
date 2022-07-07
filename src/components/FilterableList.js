@@ -9,7 +9,7 @@ function FilterableList({list, filterText}) {
     // other
     filteredList = list.filter(
       (listItem) =>
-        listItem.id.toLowerCase().includes(f) ||
+        listItem.speciesName.toLowerCase().includes(f) ||
         listItem.otherNames.some(otherName => otherName.toLowerCase().includes(f))
     );
   }
@@ -19,8 +19,8 @@ function FilterableList({list, filterText}) {
     <ul>
       {
         filteredList.map((listItem) => (
-          <li key={listItem.id}>
-            {listItem.id}
+          <li key={listItem.speciesName}>
+            {listItem.speciesName}
           </li>
         ))
       }

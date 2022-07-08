@@ -6,9 +6,18 @@ import getSpeciesList from './services/getSpeciesList';
 function App() {
   const [guessInput, setGuessInput] = useState('');
   const [species, setSpecies] = useState('');
+  const [showFilteredList, setShowFilteredList] = useState(false);
 
   const filteredList = useFilter({list: species, filterText: guessInput});
 
+  const onInputFocus = (e) => {
+    // TODO: check for species loaded
+    setShowFilteredList(true);
+  }
+  const onInputBlur = (e) => {
+    // TODO: don't hide when clicking on the list?
+    setShowFilteredList(false);
+  }
   const onInputChange = (e) => {
     setGuessInput(e.target.value);
   }
@@ -42,16 +51,20 @@ function App() {
             type="text"
             value={guessInput}
             onChange={onInputChange}
+            onFocus={onInputFocus}
+            onBlur={onInputBlur}
           />
 
-          {/* hide when input box doesn't have focus */}
-          <ul className='speciesList'>
+          { showFilteredList &&
+            <ul className='speciesList'>
             {filteredList.map((speciesObject) => (
               <li key={speciesObject._id}>
                 {speciesObject.speciesName}
               </li>
             ))}
           </ul>
+          }
+          
         </section>
       </main>
     </div>

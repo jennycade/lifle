@@ -72,7 +72,7 @@ function App() {
 
         { won &&
           <section className='won'>
-            <p>You won!</p>
+            <p>You won in {prevGuesses.length} guesses!</p>
             <p>Today's species is {prevGuesses[prevGuesses.length -1].speciesName}</p>
           </section>
         }

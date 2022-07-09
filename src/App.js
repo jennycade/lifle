@@ -4,6 +4,7 @@ import useFilter from './hooks/useFilter';
 
 import getSpeciesList from './services/getSpeciesList';
 import postGuess from './services/postGuess';
+import formatNumber from './services/formatNumber';
 
 function App() {
   const [guessInput, setGuessInput] = useState('');
@@ -64,7 +65,7 @@ function App() {
             prevGuesses.map((guess) => (
               <>
                 <div>{guess.speciesName}</div>
-                <div>{guess.years === 'win' ? 0 : guess.years}</div>
+                <div>{formatNumber(guess.years === 'win' ? 0 : guess.years)}</div>
               </>
             ))
           }

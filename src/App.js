@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import useFilter from './hooks/useFilter';
 
 import getSpeciesList from './services/getSpeciesList';
@@ -63,10 +63,10 @@ function App() {
           <div className='gridHeader'>Years since divergence</div>
           {
             prevGuesses.map((guess) => (
-              <>
+              <Fragment key={`guess-${guess.speciesName}`}>
                 <div>{guess.speciesName}</div>
                 <div>{formatNumber(guess.years === 'win' ? 0 : guess.years)}</div>
-              </>
+              </Fragment>
             ))
           }
         </section>

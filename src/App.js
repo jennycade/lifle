@@ -6,6 +6,10 @@ import getSpeciesList from './services/getSpeciesList';
 import postGuess from './services/postGuess';
 import formatNumber from './services/formatNumber';
 
+import InfoIcon from '@mui/icons-material/Info';
+import SettingsIcon from '@mui/icons-material/Settings';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+
 function App() {
   const [guessInput, setGuessInput] = useState('');
   const [species, setSpecies] = useState('');
@@ -53,8 +57,13 @@ function App() {
   return (
     <div className="App">
       <header>
+        <button><InfoIcon /></button>
         {/* menu bar: about, title, stats, settings */}
         <h1>Animle</h1>
+        <div>
+          <button><AssessmentIcon /></button>
+          <button><SettingsIcon /></button>
+        </div>
       </header>
 
       <main>

@@ -58,6 +58,7 @@ function App() {
       </header>
 
       <main>
+        {/* GUESSES */}
         <section className="prevGuesses">
           <div className='gridHeader'>Species</div>
           <div className='gridHeader'>Years since divergence</div>
@@ -71,13 +72,21 @@ function App() {
           }
         </section>
 
+        {/* WINNING MESSAGE */}
         { won &&
           <section className='won'>
             <p>You won in {prevGuesses.length} guesses!</p>
-            <p>Today's species is {prevGuesses[prevGuesses.length -1].speciesName}</p>
+            <p>Today's species is &nbsp;
+              <a href={`https://www.google.com/search?q=${prevGuesses[prevGuesses.length -1].speciesName}`}
+                target="_blank" rel="noreferrer"
+              >
+              {prevGuesses[prevGuesses.length -1].speciesName}</a>
+            </p>
+            <p>Come back tomorrow to play again.</p>
           </section>
         }
 
+        {/* GUESS INPUT */}
         <section className="enterGuess">
           <input
             type="text"

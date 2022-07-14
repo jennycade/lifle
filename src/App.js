@@ -1,16 +1,25 @@
 import './App.css';
 import { useState, useEffect, Fragment } from 'react';
+
+// components
+import Modal from './components/Modal';
+
+// hooks
 import useFilter from './hooks/useFilter';
 
+// services
 import getSpeciesList from './services/getSpeciesList';
 import postGuess from './services/postGuess';
 import formatNumber from './services/formatNumber';
 
+// icons
 import InfoIcon from '@mui/icons-material/Info';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AssessmentIcon from '@mui/icons-material/Assessment';
+import ShareIcon from '@mui/icons-material/Share';
 
 function App() {
+  const [display, setDisplay] = useState('game');
   const [guessInput, setGuessInput] = useState('');
   const [species, setSpecies] = useState('');
   const [showFilteredList, setShowFilteredList] = useState(false);
@@ -19,6 +28,12 @@ function App() {
 
   const filteredList = useFilter({list: species, filterText: guessInput});
 
+  const openModal = (modal) => {
+    setDisplay(modal);
+  }
+  const closeModal = (e) => {
+    setDisplay('game');
+  }
   const onInputFocus = (e) => {
     // TODO: check for species loaded
     setShowFilteredList(true);
@@ -57,16 +72,59 @@ function App() {
   return (
     <div className="App">
       <header>
-        <button><InfoIcon /></button>
+        <button onClick={() => openModal('info')}><InfoIcon /></button>
         {/* menu bar: about, title, stats, settings */}
         <h1>Animle</h1>
         <div>
-          <button><AssessmentIcon /></button>
-          <button><SettingsIcon /></button>
+          <button onClick={() => openModal('stats')}><AssessmentIcon /></button>
+          <button onClick={() => openModal('settings')}><SettingsIcon /></button>
         </div>
       </header>
 
       <main>
+        {/* MODALS */}
+        {/* info */}
+        { display === 'info' &&
+          <Modal onClose={closeModal}>
+            <h2>How to play</h2>
+            <p>Guess today's animal species. You can use as many guesses as you need.</p>
+            <p>Filter by species name (in future: common names!)</p>
+            <p>After each guess you'll see how closely related your guess is to the target species.</p>
+          </Modal>
+        }
+        {/* stats */}
+        { display === 'stats' &&
+          <Modal onClose={closeModal}>
+            <h2>Statistics</h2>
+            {/* TODO: statistics from API */}
+            <dl>
+              <dt>Games played</dt>
+              <dd>##</dd>
+              
+              <dt>Percent won</dt>
+              <dd>##.#%</dd>
+
+              <dt>Current streak</dt>
+              <dd>## days</dd>
+
+              <dt>Guesses</dt>
+              <dd>(Histogram goes here)</dd>
+              {/* TODO: histogram */}
+            </dl>
+
+            <p><button>{<ShareIcon/>} Share</button></p>
+            {/* TODO: share */}
+          </Modal>
+        }
+        {/* stats */}
+        { display === 'settings' &&
+          <Modal onClose={closeModal}>
+            <h2>Settings</h2>
+            <p>Coming soon: dark mode</p>
+            {/* TODO: dark/light mode */}
+          </Modal>
+        }
+
         {/* GUESSES */}
         <section className="prevGuesses">
           <div className='gridHeader'>Species</div>

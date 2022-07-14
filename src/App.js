@@ -125,19 +125,28 @@ function App() {
           </Modal>
         }
 
+        {/* INSTRUCTIONS */}
+        { prevGuesses.length === 0 &&
+          <section className="instructions">
+            Guess today's animal species
+          </section>
+        }
+
         {/* GUESSES */}
-        <section className="prevGuesses">
-          <div className='gridHeader'>Species</div>
-          <div className='gridHeader'>Years since divergence</div>
-          {
-            prevGuesses.map((guess) => (
-              <Fragment key={`guess-${guess.speciesName}`}>
-                <div>{guess.speciesName}</div>
-                <div>{formatNumber(guess.years === 'win' ? 0 : guess.years)}</div>
-              </Fragment>
-            ))
-          }
-        </section>
+        { prevGuesses.length > 0 && 
+          <section className="prevGuesses">
+            <div className='gridHeader'>Species</div>
+            <div className='gridHeader'>Years since divergence</div>
+            {
+              prevGuesses.map((guess) => (
+                <Fragment key={`guess-${guess.speciesName}`}>
+                  <div>{guess.speciesName}</div>
+                  <div>{formatNumber(guess.years === 'win' ? 0 : guess.years)}</div>
+                </Fragment>
+              ))
+            }
+          </section>
+        }
 
         {/* WINNING MESSAGE */}
         { won &&
@@ -155,8 +164,10 @@ function App() {
 
         {/* GUESS INPUT */}
         <section className="enterGuess">
+          <label htmlFor="guessInput">Species name</label>
           <input
             type="text"
+            id="guessInput"
             value={guessInput}
             onChange={onInputChange}
             onFocus={onInputFocus}

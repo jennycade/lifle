@@ -1,7 +1,12 @@
-function Modal({children}) {
+import CloseIcon from '@mui/icons-material/Close';
+
+function Modal({onClose, children}) {
   return (
     <section className="modal">
-      {children}
+      <button aria-label="close" onClick={onClose}>
+        {<CloseIcon />}
+      </button>
+      { children }
     </section>
   );
 }

@@ -1,3 +1,5 @@
+const MAX_YEARS = 8320000;
+
 async function postGuess(speciesName) {
   // TODO: make it real
   // TODO: check against species list
@@ -11,7 +13,7 @@ async function postGuess(speciesName) {
   }
 
   // random number of year (in the millions)
-  const years = Math.floor(Math.random() * 100000000);
+  const years = Math.floor(Math.random() * MAX_YEARS);
   return years;
 }
 

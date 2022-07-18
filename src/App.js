@@ -18,6 +18,9 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import ShareIcon from '@mui/icons-material/Share';
 
+// constants
+const MAX_YEARS = 8320000;
+
 function App() {
   const [display, setDisplay] = useState('game');
   const [guessInput, setGuessInput] = useState('');
@@ -116,7 +119,7 @@ function App() {
             {/* TODO: share */}
           </Modal>
         }
-        {/* stats */}
+        {/* settings */}
         { display === 'settings' &&
           <Modal onClose={closeModal}>
             <h2>Settings</h2>
@@ -140,6 +143,11 @@ function App() {
             {
               prevGuesses.map((guess) => (
                 <Fragment key={`guess-${guess.speciesName}`}>
+                  <progress
+                    value={guess.years === 'win' ?
+                      MAX_YEARS : MAX_YEARS - guess.years}
+                    max={MAX_YEARS}
+                  />
                   <div>{guess.speciesName}</div>
                   <div>{formatNumber(guess.years === 'win' ? 0 : guess.years)}</div>
                 </Fragment>

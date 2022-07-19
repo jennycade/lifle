@@ -11,6 +11,7 @@ import useFilter from './hooks/useFilter';
 import getSpeciesList from './services/getSpeciesList';
 import postGuess from './services/postGuess';
 import formatNumber from './services/formatNumber';
+import getUserId from './services/getUserId';
 
 // icons
 import InfoIcon from '@mui/icons-material/Info';
@@ -22,6 +23,7 @@ import ShareIcon from '@mui/icons-material/Share';
 const MAX_YEARS = 8320000;
 
 function App() {
+  const [userId, setUserId] = useState('');
   const [display, setDisplay] = useState('game');
   const [guessInput, setGuessInput] = useState('');
   const [species, setSpecies] = useState('');
@@ -70,7 +72,17 @@ function App() {
     }
 
     getSpecies();
-  }, [species]);
+  }, [species]); // TODO: eliminate species and species.length from this. just run on first render ([])
+
+  // get user
+  useEffect(() => {
+    const getUser = async () => {
+      const newUserId = await getUserId();
+      setUserId(newUserId);
+    }
+
+    getUser();
+  }, []);
 
   return (
     <div className="App">

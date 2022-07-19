@@ -138,8 +138,6 @@ function App() {
         {/* GUESSES */}
         { prevGuesses.length > 0 && 
           <section className="prevGuesses">
-            <div className='gridHeader'>Species</div>
-            <div className='gridHeader'>Years since divergence</div>
             {
               prevGuesses.map((guess) => (
                 <Fragment key={`guess-${guess.speciesName}`}>
@@ -149,7 +147,7 @@ function App() {
                     max={MAX_YEARS}
                   />
                   <div>{guess.speciesName}</div>
-                  <div>{formatNumber(guess.years === 'win' ? 0 : guess.years)}</div>
+                  <div>{formatNumber(guess.years === 'win' ? 0 : guess.years)} years</div>
                 </Fragment>
               ))
             }

@@ -24,6 +24,7 @@ const MAX_YEARS = 8320000;
 
 function App() {
   const [userId, setUserId] = useState('');
+  const [gameId, setGameId] = useState('');
   const [display, setDisplay] = useState('game');
   const [guessInput, setGuessInput] = useState('');
   const [species, setSpecies] = useState('');
@@ -50,7 +51,7 @@ function App() {
     const speciesName = e.target.id;
     setShowFilteredList(false);
     // TODO: check that it wasn't already guessed
-    const response = await postGuess(speciesName);
+    const response = await postGuess(speciesName, gameId, userId);
     if (response === 'win') {
       setWon(true);
     }
@@ -197,7 +198,7 @@ function App() {
               {filteredList.map((speciesObject) => (
                 <li
                   key={speciesObject._id}
-                  id={speciesObject.speciesName}
+                  id={speciesObject._id}
                   onClick={onSpeciesClick}
                 >
                   {speciesObject.speciesName}

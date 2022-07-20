@@ -1,6 +1,6 @@
 const MAX_YEARS = 8320000;
 
-async function postGuess(speciesName) {
+async function postGuess(speciesId, gameId, userId) {
   // TODO: make it real
   // TODO: check against species list
   // TODO: respond with years or win

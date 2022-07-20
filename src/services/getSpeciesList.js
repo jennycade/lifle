@@ -1,9 +1,11 @@
-import species from '../data/sample_species.json';
+import { getResponse } from "./getResponse";
 
 async function getSpeciesList() {
-  // TODO: change to real database
-  // TODO: wrap in useMemo to avoid unnecessary db calls
-  
+  /*
+  get all species from server
+  */
+
+  const species = await getResponse('species', 'GET');
 
   return species;
 }

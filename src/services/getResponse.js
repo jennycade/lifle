@@ -7,6 +7,7 @@ export const getResponse = async (route, method) => {
     `${process.env.REACT_APP_BACKEND_URI}/${route}`,
     {
       method: method,
+      headers,
     },
   );
   const json = await response.json();

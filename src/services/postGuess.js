@@ -4,6 +4,8 @@ async function postGuess(speciesId, gameId, userId) {
   // TODO: make it real
   // TODO: check against species list
   // TODO: respond with years or win
+  const route = `users/${userId}/games/${gameId}/guesses/${speciesId}`;
+  console.log(`Send POST request to /${route}`);
 
   // randomly respond with win or years
   const chanceOfWinning = 1/6;

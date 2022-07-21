@@ -48,15 +48,16 @@ function App() {
     setGuessInput(e.target.value);
   }
   const onSpeciesClick = async (e) => {
-    const speciesName = e.target.id;
+    const speciesId = e.target.id;
     setShowFilteredList(false);
     // TODO: check that it wasn't already guessed
-    const response = await postGuess(speciesName, gameId, userId);
+    const response = await postGuess(speciesId, gameId, userId);
     if (response === 'win') {
       setWon(true);
     }
     const newGuesses = [...prevGuesses];
-    newGuesses.push({speciesName, years: response});
+    const lastGuess = species.find((s) => s._id === speciesId);
+    newGuesses.push({...lastGuess, years: response});
     setPrevGuesses(newGuesses);
 
     // TODO: handle error
@@ -153,7 +154,7 @@ function App() {
           <section className="prevGuesses">
             {
               prevGuesses.map((guess) => (
-                <Fragment key={`guess-${guess.speciesName}`}>
+                <Fragment key={`guess-${guess._id}`}>
                   <progress
                     value={guess.years === 'win' ?
                       MAX_YEARS : MAX_YEARS - guess.years}
